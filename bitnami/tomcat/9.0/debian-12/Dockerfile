@@ -56,6 +56,14 @@ ENV APP_VERSION="9.0.88" \
     JAVA_HOME="/opt/bitnami/java" \
     PATH="/opt/bitnami/common/bin:/opt/bitnami/java/bin:/opt/bitnami/tomcat/bin:$PATH"
 
+# MAVENBLUE CHANGES: CLEAN UP BITNAMI CONTAINER
+
+# remove unnecessary webapplications that are distributed with TomCat.
+RUN rm -rf /opt/bitnami/tomcat/webapps_default/*
+
+# remove pre-installed db drivers
+RUN rm /opt/bitnami/tomcat/lib/mariadb* && rm /opt/bitnami/tomcat/lib/postgresq*
+
 EXPOSE 8009 8080
 
 USER 1001
